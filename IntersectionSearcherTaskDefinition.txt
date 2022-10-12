@@ -1,0 +1,63 @@
+Постановка задачи:
+- дан набор именованных случаев, в каждом из которых определён список условий, которым должны соответствовать параметры запроса;
+- дан набор запросов;
+- дана карта истинности, отражающая соответствие между запросами и ожидаемыми списками совпавших случаев;
+- дан скелет обработчика запросов IntersectionSearcher;
+- дан набор тестов, сравнивающих результат обработки каждого запроса с ожидаемыми значениями.
+
+Требуется доработать IntersectionSearcher таким образом, чтобы все 8 тестов завершались успешно.
+
+Ситуация с тестами на момент формирования задачи:
+
+bash-3.2$ pytest
+================================================================================================================== test session starts ===================================================================================================================
+platform darwin -- Python 3.9.12, pytest-6.2.5, py-1.11.0, pluggy-1.0.0
+rootdir: /Users/19673099/SberWork/Docs/Tasks_For_Applicants/PolyIntersectionSearcher
+plugins: Faker-11.3.0, celery-4.4.7, mock-3.6.1, django-4.5.2, cov-3.0.0
+collected 8 items                                                                                                                                                                                                                                        
+
+test_intersection_searcher.py ....FFFF                                                                                                                                                                                                             [100%]
+
+======================================================================================================================== FAILURES ========================================================================================================================
+__________________________________________________________________________________________________________________ test_4_empty_request __________________________________________________________________________________________________________________
+
+    def test_4_empty_request():
+        request, expected_response = request_response_true_map[4]
+        response = IS.process(request)
+>       assert response == expected_response
+E       AssertionError: assert None == ['a in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+
+test_intersection_searcher.py:94: AssertionError
+__________________________________________________________________________________________________________________ test_5_empty_request __________________________________________________________________________________________________________________
+
+    def test_5_empty_request():
+        request, expected_response = request_response_true_map[5]
+        response = IS.process(request)
+>       assert response == expected_response
+E       AssertionError: assert None == ['a in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+
+test_intersection_searcher.py:100: AssertionError
+__________________________________________________________________________________________________________________ test_6_empty_request __________________________________________________________________________________________________________________
+
+    def test_6_empty_request():
+        request, expected_response = request_response_true_map[6]
+        response = IS.process(request)
+>       assert response == expected_response
+E       AssertionError: assert None == ['a not in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+
+test_intersection_searcher.py:106: AssertionError
+__________________________________________________________________________________________________________________ test_7_empty_request __________________________________________________________________________________________________________________
+
+    def test_7_empty_request():
+        request, expected_response = request_response_true_map[7]
+        response = IS.process(request)
+>       assert response == expected_response
+E       AssertionError: assert None == ['a not in [a1, a2] and b in [b3, b8]', 'a in [a3, a1] and b not in [b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+
+test_intersection_searcher.py:112: AssertionError
+================================================================================================================ short test summary info =================================================================================================================
+FAILED test_intersection_searcher.py::test_4_empty_request - AssertionError: assert None == ['a in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+FAILED test_intersection_searcher.py::test_5_empty_request - AssertionError: assert None == ['a in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+FAILED test_intersection_searcher.py::test_6_empty_request - AssertionError: assert None == ['a not in [a1, a2] and b in [b3, b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+FAILED test_intersection_searcher.py::test_7_empty_request - AssertionError: assert None == ['a not in [a1, a2] and b in [b3, b8]', 'a in [a3, a1] and b not in [b8]', 'a not in [a5, a6] and b not in [b9, b11]']
+============================================================================================================== 4 failed, 4 passed in 0.18s ===============================================================================================================
